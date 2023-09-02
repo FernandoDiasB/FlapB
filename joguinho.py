@@ -42,7 +42,7 @@ class Passaro:
     def mover_passaro(self):
         # calculo de deslocamento
         self.tempo += 1
-        deslocamento = 2  * (self.tempo**2) + self.velocidade * self.tempo
+        deslocamento = 1.8 * (self.tempo**2) + self.velocidade * self.tempo
 
         # restrição do movimento 
         if deslocamento > 16:
@@ -60,7 +60,7 @@ class Passaro:
         else:
             if self.angulo > -90:
                 self.angulo -= self.VELOCIDADE_ROTACAO
-
+ 
     
     def desenhar(self, tela):
         # definir imagem que será usada
@@ -154,9 +154,9 @@ class Chao:
         self.x2 -= self.VELOCIDADE
 
         if self.x1 + self.LARGURA < 0:
-            self.x1 = self.x1 + self.LARGURA
+            self.x1 = self.x2 + self.LARGURA
         if self.x2 + self.LARGURA < 0:
-            self.x2 = self.x2 + self.LARGURA
+            self.x2 = self.x1 + self.LARGURA
 
     def desenhar(self,tela):
         tela.blit(self.IMAGEM, (self.x1, self.y))
@@ -219,11 +219,11 @@ def main():
                 remover_canos.append(cano)
 
         if adicionar_cano:
-            pontos += 1
+            pontos += 1 
             canos.append(Cano(600))
         
         for cano in remover_canos:
-            cano.remove(cano)
+            canos.remove(cano)
 
         for i, passaro in enumerate(passaros):
             if(passaro.y + passaro.imagem.get_height()) > chao.y or passaro.y < 0:
